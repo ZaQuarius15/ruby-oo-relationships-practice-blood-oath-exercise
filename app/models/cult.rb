@@ -3,7 +3,7 @@ class Cult
     attr_accessor :name, :location, :slogan, :founding_year, :minimum_age
      
 
-    @@all_cults = []
+    @@all = []
 
     def initialize(name, location, founding_year, slogan, minimum_age=nil)
         @name = name
@@ -11,7 +11,7 @@ class Cult
         @founding_year = founding_year
         @slogan = slogan
         @minimum_age = minimum_age
-        @@all_cults << self
+        @@all << self
     end 
 
     def recruit_follower(initiation_date, follower)
@@ -53,27 +53,25 @@ class Cult
     end
 
 
-    private
-
     def self.all
-        @@all_cults
+        @@all
     end
 
     def self.find_by_name(name)
-        @@all_cults.select {|cult| cult.name == name}
+        all.select {|cult| cult.name == name}
     end 
 
     def self.find_by_location(location)
-        @@all_cults.select {|cult| cult.location == location}
+        all.select {|cult| cult.location == location}
     end 
 
     def self.find_by_founding_year(founding_year)
-        @@all_cults.select {|cult| cult.founding_year == founding_year}
+        all.select {|cult| cult.founding_year == founding_year}
     end 
 
     def self.least_popular
         least_popular = nil
-        @@all_cults.each do |cult|
+        all.each do |cult|
             if least_popular == nil
                 least_popular = cult
             elsif cult.cult_population < least_popular.cult_population

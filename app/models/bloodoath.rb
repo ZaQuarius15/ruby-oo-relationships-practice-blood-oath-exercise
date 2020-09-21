@@ -2,22 +2,22 @@ class BloodOath
 
     attr_reader :initiation_date, :follower, :cult
 
-    @@all_bloodoaths = []
+    @@all = []
 
     def initialize(initiation_date, follower, cult)
         @initiation_date = initiation_date
         @follower = follower
         @cult = cult 
-        @@all_bloodoaths << self
+        @@all << self
     end 
     
     def self.all 
-        @@all_bloodoaths
+        @@all
     end
 
     def self.first_oath
         first_oath = nil
-        @@all_bloodoaths.each do |bloodoath|
+        all.each do |bloodoath|
             if first_oath == nil
                 first_oath = bloodoath
             elsif bloodoath.initiation_date < first_oath.initiation_date
@@ -27,6 +27,4 @@ class BloodOath
         first_oath.follower
     end
 
-
-    
 end

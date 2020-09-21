@@ -1,14 +1,14 @@
 class Follower
 
-    attr_accessor :name, :age, :life_motto
+    @@all = []
 
-    @@all_followers = []
+    attr_accessor :name, :age, :life_motto
 
     def initialize(name, age, life_motto)
         @name = name
         @age = age
         @life_motto = life_motto
-        @@all_followers << self
+        @@all << self
     end
 
     def cults
@@ -49,15 +49,12 @@ class Follower
     end
 
 
-
-    private
-
     def self.all
-        @@all_followers
+        @@all
     end 
 
     def self.of_a_certain_age(age)
-        @@all_followers.each_with_object([]) do |follower, final| 
+        all.each_with_object([]) do |follower, final| 
             if follower.age >= age
                 final << follower
             end
@@ -66,7 +63,7 @@ class Follower
 
     def self.most_active
         most_active = nil
-        Follower.all.each do |follower|
+        all.each do |follower|
             if most_active == nil
                 most_active = follower
             elsif follower.cults.count > most_active.cults.count
@@ -77,7 +74,7 @@ class Follower
     end
 
     def self.top_ten
-        fsort = @@all_followers.sort_by do |follower|
+        fsort = all.sort_by do |follower|
             -(follower.cults.count)
         end
         fsort[0..9].each_with_object([]) do |follower, top_ten|
